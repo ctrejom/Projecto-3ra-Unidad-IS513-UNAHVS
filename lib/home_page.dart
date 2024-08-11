@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Widgets/NavigationBarCustom.dart';  
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'product_screen.dart'; // Import the new screen
+import 'Widgets/NavigationBarCustom.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -10,6 +13,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  List<dynamic> products = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchProducts();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -31,6 +41,27 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Future<void> fetchProducts() async {
+    final response =
+        await http.get(Uri.parse('https://fakestoreapi.com/products'));
+
+    if (response.statusCode == 200) {
+      setState(() {
+        products = json.decode(response.body).map((product) {
+          return {
+            'title': product['title'],
+            'image': product['image'],
+            'price': product['price'] is int
+                ? (product['price'] as int).toDouble()
+                : product['price'],
+          };
+        }).toList();
+      });
+    } else {
+      throw Exception('Failed to load products');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,82 +72,10 @@ class _HomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, 
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Aquí colocas el SearchBar
-              // Añade tu SearchBar aquí
-              
-              SizedBox(height: 20),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        print('Categoría: Ropa de Hombre');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
-                        foregroundColor: Colors.black,
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      icon: Icon(Icons.male, size: 30, color: Colors.blue),
-                      label: Text('Ropa de Hombre'),
-                    ),
-                    SizedBox(width: 10),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        print('Categoría: Joyeria');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
-                        foregroundColor: Colors.black,
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      icon: Icon(Icons.watch, size: 30, color: Colors.purple),
-                      label: Text('Joyeria'),
-                    ),
-                    SizedBox(width: 10),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        print('Categoría: Electrónicos');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
-                        foregroundColor: Colors.black,
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      icon: Icon(Icons.electrical_services, size: 30, color: Colors.orange),
-                      label: Text('Electrónicos'),
-                    ),
-                    SizedBox(width: 10),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        print('Categoría: Ropa de Mujer');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
-                        foregroundColor: Colors.black,
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      icon: Icon(Icons.female, size: 30, color: Colors.pink),
-                      label: Text('Ropa de Mujer'),
-                    ),
-                  ],
-                ),
-              ),
+              // Existing SearchBar and category buttons
+
               SizedBox(height: 10),
               Text(
                 'Top Sellers',
@@ -126,62 +85,62 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 10),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
+              products.isEmpty
+                  ? Center(child: CircularProgressIndicator())
+                  : SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: products.take(5).map((product) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailScreen(
+                                    title: product['title'],
+                                    imageUrl: product['image'],
+                                    price: product['price'],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 150,
+                              margin: EdgeInsets.only(right: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      product['image'],
+                                      height: 100,
+                                      width: 150,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    product['title'],
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    '\$${product['price']}',
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.green),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
                       ),
-                      child: Center(child: Text('Item 1')),
                     ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: Text('Item 1')),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: Text('Item 1')),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: Text('Item 1')),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: Text('Item 1')),
-                    ),
-                  ],
-                ),
-              ),
               SizedBox(height: 10),
               Text(
                 'Best For You UwU',
@@ -191,62 +150,62 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 10),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
+              products.length > 5
+                  ? SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: products.skip(5).map((product) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailScreen(
+                                    title: product['title'],
+                                    imageUrl: product['image'],
+                                    price: product['price'],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 150,
+                              margin: EdgeInsets.only(right: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      product['image'],
+                                      height: 100,
+                                      width: 150,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    product['title'],
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    '\$${product['price']}',
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.green),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
                       ),
-                      child: Center(child: Text('Item 1')),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: Text('Item 1')),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: Text('Item 1')),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: Text('Item 1')),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: Text('Item 1')),
-                    ),
-                  ],
-                ),
-              ),
+                    )
+                  : Center(child: Text('No more products available')),
             ],
           ),
         ),
