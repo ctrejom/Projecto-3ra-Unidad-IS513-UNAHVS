@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'product_screen.dart'; // Import the new screen
-import 'Widgets/NavigationBarCustom.dart';
+import 'package:myapp/Widgets/NavigationBarCustom.dart';
+import 'ProductDetailScreen.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -74,8 +74,89 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Existing SearchBar and category buttons
-
+              SearchBar(
+                leading: Icon(Icons.search),
+                hintText: 'Buscar',
+                onChanged: (value) {
+                  print('Texto de búsqueda: $value');
+                },
+              ),
+              SizedBox(height: 20),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        print('Categoría: Ropa de Hombre');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[200],
+                        foregroundColor: Colors.black,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      icon: Icon(Icons.male, size: 30, color: Colors.blue),
+                      label: Text('Ropa de Hombre'),
+                    ),
+                    SizedBox(width: 10),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        print('Categoría: Joyeria');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[200],
+                        foregroundColor: Colors.black,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      icon: Icon(Icons.watch, size: 30, color: Colors.purple),
+                      label: Text('Joyeria'),
+                    ),
+                    SizedBox(width: 10),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        print('Categoría: Electrónicos');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[200],
+                        foregroundColor: Colors.black,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      icon: Icon(Icons.electrical_services,
+                          size: 30, color: Colors.orange),
+                      label: Text('Electrónicos'),
+                    ),
+                    SizedBox(width: 10),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        print('Categoría: Ropa de Mujer');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[200],
+                        foregroundColor: Colors.black,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      icon: Icon(Icons.female, size: 30, color: Colors.pink),
+                      label: Text('Ropa de Mujer'),
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(height: 10),
               Text(
                 'Top Sellers',
