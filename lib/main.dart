@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:myapp/home_page.dart';
 import 'package:myapp/login_page.dart';
 import 'package:myapp/register_page.dart';
+import 'package:myapp/payment_page.dart';
+import 'package:myapp/order_page.dart';
+import 'package:myapp/cart_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -18,6 +21,9 @@ class MyApp extends StatelessWidget {
         'login': (context) => LoginPage(),
         'Registrar': (context) => RegisterPage(),
         'Home': (context) => HomePage(),
+        'Order': (context) => OrderPage(),
+        'Cart': (context) => CartPage(),
+        'Payment': (context) => PaymentPage(), 
       },
     );
   }
