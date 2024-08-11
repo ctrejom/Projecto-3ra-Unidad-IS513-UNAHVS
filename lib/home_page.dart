@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/Widgets/NavigationBarCustom.dart';  
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -10,9 +11,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) { //Funcion para el navigation bar
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      switch (index) {
+        case 0:
+          Navigator.pushNamed(context, 'Home');
+          break;
+        case 1:
+          Navigator.pushNamed(context, 'Order');
+          break;
+        case 2:
+          Navigator.pushNamed(context, 'Cart');
+          break;
+        case 3:
+          Navigator.pushNamed(context, 'Payment');
+          break;
+      }
     });
   }
 
@@ -28,13 +43,9 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start, 
             children: [
-              SearchBar(
-                leading: Icon(Icons.search),
-                hintText: 'Buscar',
-                onChanged: (value) {
-                  print('Texto de búsqueda: $value');
-                },
-              ),
+              // Aquí colocas el SearchBar
+              // Añade tu SearchBar aquí
+              
               SizedBox(height: 20),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -240,32 +251,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold), 
-        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal), 
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Mis Pedidos',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Carrito',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.payment),
-            label: 'Facturación',
-          ),
-        ],
+      bottomNavigationBar: NavigationBarCustom(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }
