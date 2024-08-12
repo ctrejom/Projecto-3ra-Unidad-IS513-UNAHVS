@@ -16,16 +16,16 @@ class _OrderPageState extends State<OrderPage> {
       _selectedIndex = index;
       switch (index) {
         case 0:
-          Navigator.pushNamed(context, 'Home');
+          Navigator.pushReplacementNamed(context, 'Home');
           break;
         case 1:
-          Navigator.pushNamed(context, 'Order');
+          Navigator.pushReplacementNamed(context, 'Order');
           break;
         case 2:
-          Navigator.pushNamed(context, 'Cart');
+          Navigator.pushReplacementNamed(context, 'Cart');
           break;
         case 3:
-          Navigator.pushNamed(context, 'Payment');
+          Navigator.pushReplacementNamed(context, 'Payment');
           break;
       }
     });

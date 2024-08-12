@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'Home');
+                        Navigator.pushReplacementNamed(context, 'Home');
                       },
                       
                       child: const Text('Iniciar sesión'),
