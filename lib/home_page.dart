@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:myapp/Widgets/NavigationBarCustom.dart';
 import 'ProductDetailScreen.dart';
+import 'cart_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -14,6 +15,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   List<dynamic> products = [];
+  List<dynamic> filteredProducts = [];
+  String selectedCategory = '';
 
   @override
   void initState() {
@@ -26,16 +29,16 @@ class _HomePageState extends State<HomePage> {
       _selectedIndex = index;
       switch (index) {
         case 0:
-          Navigator.pushNamed(context, 'Home');
+          Navigator.pushReplacementNamed(context, 'Home');
           break;
         case 1:
-          Navigator.pushNamed(context, 'Order');
+          Navigator.pushReplacementNamed(context, 'Order');
           break;
         case 2:
-          Navigator.pushNamed(context, 'Cart');
+          Navigator.pushReplacementNamed(context, 'Cart');
           break;
         case 3:
-          Navigator.pushNamed(context, 'Payment');
+          Navigator.pushReplacementNamed(context, 'Payment');
           break;
       }
     });
@@ -54,12 +57,24 @@ class _HomePageState extends State<HomePage> {
             'price': product['price'] is int
                 ? (product['price'] as int).toDouble()
                 : product['price'],
+            'description': product['description'] ?? 'No description available',
+            'category': product['category'],
           };
         }).toList();
+        filteredProducts = products;
       });
     } else {
       throw Exception('Failed to load products');
     }
+  }
+
+  void filterProductsByCategory(String category) {
+    setState(() {
+      selectedCategory = category;
+      filteredProducts = products.where((product) {
+        return product['category'] == category;
+      }).toList();
+    });
   }
 
   @override
@@ -88,10 +103,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     ElevatedButton.icon(
                       onPressed: () {
-                        print('Categoría: Ropa de Hombre');
+                        filterProductsByCategory('men\'s clothing');
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
+                        backgroundColor: selectedCategory == 'men\'s clothing'
+                            ? Colors.blue
+                            : Colors.grey[200],
                         foregroundColor: Colors.black,
                         padding:
                             EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -105,10 +122,12 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width: 10),
                     ElevatedButton.icon(
                       onPressed: () {
-                        print('Categoría: Joyeria');
+                        filterProductsByCategory('jewelery');
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
+                        backgroundColor: selectedCategory == 'jewelery'
+                            ? Colors.blue
+                            : Colors.grey[200],
                         foregroundColor: Colors.black,
                         padding:
                             EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -122,10 +141,12 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width: 10),
                     ElevatedButton.icon(
                       onPressed: () {
-                        print('Categoría: Electrónicos');
+                        filterProductsByCategory('electronics');
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
+                        backgroundColor: selectedCategory == 'electronics'
+                            ? Colors.blue
+                            : Colors.grey[200],
                         foregroundColor: Colors.black,
                         padding:
                             EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -140,10 +161,12 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width: 10),
                     ElevatedButton.icon(
                       onPressed: () {
-                        print('Categoría: Ropa de Mujer');
+                        filterProductsByCategory('women\'s clothing');
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
+                        backgroundColor: selectedCategory == 'women\'s clothing'
+                            ? Colors.blue
+                            : Colors.grey[200],
                         foregroundColor: Colors.black,
                         padding:
                             EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -166,12 +189,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 10),
-              products.isEmpty
+              filteredProducts.isEmpty
                   ? Center(child: CircularProgressIndicator())
                   : SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: products.take(5).map((product) {
+                        children: filteredProducts.take(5).map((product) {
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -180,6 +203,7 @@ class _HomePageState extends State<HomePage> {
                                   builder: (context) => ProductDetailScreen(
                                     title: product['title'],
                                     imageUrl: product['image'],
+                                    description: product['description'],
                                     price: product['price'],
                                   ),
                                 ),
@@ -231,11 +255,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: 10),
-              products.length > 5
+              filteredProducts.length > 5
                   ? SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: products.skip(5).map((product) {
+                        children: filteredProducts.skip(5).map((product) {
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
@@ -244,6 +268,7 @@ class _HomePageState extends State<HomePage> {
                                   builder: (context) => ProductDetailScreen(
                                     title: product['title'],
                                     imageUrl: product['image'],
+                                    description: product['description'],
                                     price: product['price'],
                                   ),
                                 ),
