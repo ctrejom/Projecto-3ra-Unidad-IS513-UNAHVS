@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:myapp/Widgets/NavigationBarCustom.dart';
 import 'ProductDetailScreen.dart';
 import 'cart_page.dart';
+import 'category_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -103,15 +104,26 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     ElevatedButton.icon(
                       onPressed: () {
-                        filterProductsByCategory('men\'s clothing');
+                        final categoryProducts = products.where((product) {
+                          return product['category'] == 'men\'s clothing';
+                        }).toList();
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CategoryGridPage(
+                              products: categoryProducts,
+                              categoryName: 'Ropa de Hombre',
+                            ),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'men\'s clothing'
                             ? Colors.blue
                             : Colors.grey[200],
                         foregroundColor: Colors.black,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -122,15 +134,26 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width: 10),
                     ElevatedButton.icon(
                       onPressed: () {
-                        filterProductsByCategory('jewelery');
+                        final categoryProducts = products.where((product) {
+                          return product['category'] == 'jewelery';
+                        }).toList();
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CategoryGridPage(
+                              products: categoryProducts,
+                              categoryName: 'Joyeria',
+                            ),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'jewelery'
                             ? Colors.blue
                             : Colors.grey[200],
                         foregroundColor: Colors.black,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -141,35 +164,56 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width: 10),
                     ElevatedButton.icon(
                       onPressed: () {
-                        filterProductsByCategory('electronics');
+                        final categoryProducts = products.where((product) {
+                          return product['category'] == 'electronics';
+                        }).toList();
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CategoryGridPage(
+                              products: categoryProducts,
+                              categoryName: 'Electrónicos',
+                            ),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'electronics'
                             ? Colors.blue
                             : Colors.grey[200],
                         foregroundColor: Colors.black,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      icon: Icon(Icons.electrical_services,
-                          size: 30, color: Colors.orange),
+                      icon: Icon(Icons.electrical_services, size: 30, color: Colors.orange),
                       label: Text('Electrónicos'),
                     ),
                     SizedBox(width: 10),
                     ElevatedButton.icon(
                       onPressed: () {
-                        filterProductsByCategory('women\'s clothing');
+                        final categoryProducts = products.where((product) {
+                          return product['category'] == 'women\'s clothing';
+                        }).toList();
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CategoryGridPage(
+                              products: categoryProducts,
+                              categoryName: 'Ropa de Mujer',
+                            ),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'women\'s clothing'
                             ? Colors.blue
                             : Colors.grey[200],
                         foregroundColor: Colors.black,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
