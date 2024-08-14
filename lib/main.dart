@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Projecto 3ra Unidad',
+      title: 'Online Shopping',
       initialRoute: 'login',
       routes: {
         'login': (context) => LoginPage(),
-        'Registrar': (context) => RegisterPage(),
+        'Register': (context) => RegisterPage(),
         'Home': (context) => HomePage(),
         'Order': (context) => OrderPage(),
         'Cart': (context) => CartPage(),

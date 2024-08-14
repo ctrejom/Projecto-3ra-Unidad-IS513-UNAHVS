@@ -145,7 +145,7 @@ class _CartPageState extends State<CartPage> {
                                 );
                               }
                             : null,
-                        child: Text('Comprar'),
+                        child: Text('Buy Now'),
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(
                               horizontal: 50, vertical: 15),

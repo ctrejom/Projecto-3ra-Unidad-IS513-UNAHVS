@@ -50,18 +50,18 @@ class _PaymentPageState extends State<PaymentPage> {
         child: Padding(
           padding: EdgeInsets.all(16),
           child: Form(
-            key: _formKey, // Asignas la GlobalKey al Form
+            key: _formKey, 
             child: Column(
               children: [
                 TextFormCustom(
-                  label: 'Ingrese los Numeros de su Tarjeta',
+                  label: 'Please enter your card number',
                   controller: tarjetaController,
                   keyboardType: TextInputType.number,
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
-                      return 'Por favor, ingrese su número de tarjeta';
+                      return 'Please provide your card number';
                     } else if (valor.length != 16) {
-                      return 'El número de la tarjeta debe tener 16 dígitos';
+                      return 'Your card number must be 16 digits';
                     }
                     return null;
                   },
@@ -73,49 +73,49 @@ class _PaymentPageState extends State<PaymentPage> {
                   keyboardType: TextInputType.number,
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
-                      return 'Por favor, ingrese su CVV';
+                      return 'Please provide your CVV';
                     } else if (valor.length != 3) {
-                      return 'El CVV debe tener 3 dígitos';
+                      return 'Your CVV must be 3 digits';
                     }
                     return null;
                   },
                 ),
                 SizedBox(height: 5),
                 TextFormCustom(
-                  label: 'Fecha Expiración (MM)',
+                  label: 'Expiration Date (MM)',
                   controller: mesController,
                   keyboardType: TextInputType.number,
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
-                      return 'Ingrese un valor';
+                      return 'Please enter a value';
                     }
                     if(valor.length < 1 || valor.length > 2)
                     {
-                      return 'Debe ingresar solo 2 numeros';
+                      return 'Please enter 2 valid digits';
                     }
                     final int? numero = int.tryParse(valor);
                     if (numero == null || numero < 1 || numero > 12) {
-                      return 'Debe ingresar un número del 1 al 12';
+                      return 'Please enter a valid month (i.e. 1-12)';
                     }
                     return null;
                   },
                 ),
                 SizedBox(height: 5),
                 TextFormCustom(
-                  label: 'Fecha Expiración (AA)',
+                  label: 'Expiration Date (AA)',
                   controller: anioController,
                   keyboardType: TextInputType.number,
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
-                      return 'Ingrese un valor';
+                      return 'Please enter a value';
                     }
                     if(valor.length < 1 || valor.length > 2)
                     {
-                      return 'Debe ingresar solo 2 numeros';
+                      return 'Please enter 2 valid digits';
                     }
                     final int? numero = int.tryParse(valor);
                     if (numero == null || numero < DateTime.now().year % 100) {
-                      return 'Debe ingresar un año válido';
+                      return 'Please enter a valid year (i.e. >24)';
                     }
                     return null;
                   },
@@ -127,15 +127,15 @@ class _PaymentPageState extends State<PaymentPage> {
                         PaymentPage.hasCreditCard = true;
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Tarjeta registrada exitosamente!')),
+                        SnackBar(content: Text('Payment method added!')),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Por favor, complete todos los campos correctamente.')),
+                        SnackBar(content: Text('Please enter all the corresponding values.')),
                       );
                     }
                   },
-                  child: Text('Guardar Tarjeta'),
+                  child: Text('Save Payment Method'),
                 ),
               ],
             ),

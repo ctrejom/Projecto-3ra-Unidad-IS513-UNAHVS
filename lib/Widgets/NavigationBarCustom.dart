@@ -23,19 +23,19 @@ class NavigationBarCustom extends StatelessWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Inicio',
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.list),
-          label: 'Mis Pedidos',
+          label: 'My Orders',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
-          label: 'Carrito',
+          label: 'Cart',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.payment),
-          label: 'Facturación',
+          label: 'Payment',
         ),
       ],
     );

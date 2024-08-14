@@ -100,12 +100,12 @@ class _HomePageState extends State<HomePage> {
             children: [
               SearchBar(
                 leading: Icon(Icons.search),
-                hintText: 'Buscar',
+                hintText: 'Search',
                 onSubmitted: (value) {
                   if (value.trim().isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Por favor, ingrese un término de búsqueda válido.'),
+                        content: Text('Please enter a valid term.'),
                       ),
                     );
                     return;
@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                             builder: (context) => CategoryGridPage(
                               products: categoryProducts,
-                              categoryName: 'Ropa de Hombre',
+                              categoryName: 'men\'s clothing',
                             ),
                           ),
                         );
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       icon: Icon(Icons.male, size: 30, color: Colors.blue),
-                      label: Text('Ropa de Hombre'),
+                      label: Text('Men\'s clothing'),
                     ),
                     SizedBox(width: 10),
                     ElevatedButton.icon(
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                             builder: (context) => CategoryGridPage(
                               products: categoryProducts,
-                              categoryName: 'Joyeria',
+                              categoryName: 'Jewelry',
                             ),
                           ),
                         );
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       icon: Icon(Icons.watch, size: 30, color: Colors.purple),
-                      label: Text('Joyeria'),
+                      label: Text('Jewelry'),
                     ),
                     SizedBox(width: 10),
                     ElevatedButton.icon(
@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                             builder: (context) => CategoryGridPage(
                               products: categoryProducts,
-                              categoryName: 'Electrónicos',
+                              categoryName: 'Electronics',
                             ),
                           ),
                         );
@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       icon: Icon(Icons.electrical_services, size: 30, color: Colors.orange),
-                      label: Text('Electrónicos'),
+                      label: Text('Electronics'),
                     ),
                     SizedBox(width: 10),
                     ElevatedButton.icon(
@@ -232,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                             builder: (context) => CategoryGridPage(
                               products: categoryProducts,
-                              categoryName: 'Ropa de Mujer',
+                              categoryName: 'Women\'s Clothing',
                             ),
                           ),
                         );
@@ -248,14 +248,14 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       icon: Icon(Icons.female, size: 30, color: Colors.pink),
-                      label: Text('Ropa de Mujer'),
+                      label: Text('Women\'s Clothing'),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 10),
               Text(
-                'Top Sellers',
+                'Recomended for You',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

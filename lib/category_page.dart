@@ -17,10 +17,10 @@ class CategoryGridPage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // Número de columnas
+            crossAxisCount: 2,
             crossAxisSpacing: 10.0,
             mainAxisSpacing: 10.0,
-            childAspectRatio: 1, // Relación de aspecto 1:1 (cuadrado)
+            childAspectRatio: 1,
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {
