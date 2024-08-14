@@ -3,8 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:myapp/Widgets/NavigationBarCustom.dart';
 import 'ProductDetailScreen.dart';
-import 'cart_page.dart';
 import 'category_page.dart';
+import 'search_page.dart';
+import 'Widgets/NavigationBarCustom.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -78,6 +79,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void filterProductsBySearchQuery(String query) {
+    setState(() {
+      filteredProducts = products.where((product) {
+        return product['title'].toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,8 +102,29 @@ class _HomePageState extends State<HomePage> {
               SearchBar(
                 leading: Icon(Icons.search),
                 hintText: 'Buscar',
-                onChanged: (value) {
-                  print('Texto de búsqueda: $value');
+                onSubmitted: (value) {
+                  if (value.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Por favor, ingrese un término de búsqueda válido.'),
+                      ),
+                    );
+                    return;
+                  }
+                  filterProductsBySearchQuery(value);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchPage(
+                        searchQuery: value,
+                        searchResults: filteredProducts,
+                      ),
+                    ),
+                  ).then((_) {
+                    setState(() {
+                      filteredProducts = products;
+                    });
+                  });
                 },
               ),
               SizedBox(height: 20),
@@ -355,7 +385,7 @@ class _HomePageState extends State<HomePage> {
                         }).toList(),
                       ),
                     )
-                  : Center(child: Text('No more products available')),
+                  : Container(),
             ],
           ),
         ),
