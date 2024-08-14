@@ -4,6 +4,12 @@ import 'Widgets/NavigationBarCustom.dart';
 class OrderPage extends StatefulWidget {
   OrderPage({super.key});
 
+  static List<Map<String, dynamic>> orderItems = [];
+
+  static void addToOrder(List<Map<String, dynamic>> items) {
+    orderItems.addAll(items);
+  }
+
   @override
   _OrderPageState createState() => _OrderPageState();
 }
@@ -37,9 +43,26 @@ class _OrderPageState extends State<OrderPage> {
       appBar: AppBar(
         title: Text('OrderPage'),
       ),
-      body: Center(
-        child: Text('This is the Order Page'),
-      ),
+      body: OrderPage.orderItems.isEmpty
+          ? Center(child: Text('No orders placed'))
+          : ListView.builder(
+              itemCount: OrderPage.orderItems.length,
+              itemBuilder: (context, index) {
+                final product = OrderPage.orderItems[index];
+                return ListTile(
+                  leading: Image.network(
+                    product['imageUrl'],
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.contain,
+                  ),
+                  title: Text(product['title']),
+                  subtitle: Text(
+                    '\$${product['price']} x ${product['quantity']}',
+                  ),
+                );
+              },
+            ),
       bottomNavigationBar: NavigationBarCustom(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
