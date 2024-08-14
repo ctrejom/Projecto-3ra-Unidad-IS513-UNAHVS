@@ -5,7 +5,6 @@ import 'package:myapp/Widgets/NavigationBarCustom.dart';
 import 'ProductDetailScreen.dart';
 import 'category_page.dart';
 import 'search_page.dart';
-import 'Widgets/NavigationBarCustom.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -322,7 +321,7 @@ class _HomePageState extends State<HomePage> {
                     ),
               SizedBox(height: 10),
               Text(
-                'Best For You UwU',
+                'Best For You',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
