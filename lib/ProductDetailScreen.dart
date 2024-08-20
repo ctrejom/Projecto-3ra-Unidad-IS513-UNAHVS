@@ -79,10 +79,6 @@ class ProductDetailScreen extends StatelessWidget {
                   );
                 },
                 child: Text('Add to Cart'),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                  textStyle: TextStyle(fontSize: 18),
-                ),
               ),
             ),
           ],

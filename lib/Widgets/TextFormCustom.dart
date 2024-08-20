@@ -32,9 +32,8 @@ class  TextFormCustom extends StatelessWidget {
           ),
           labelStyle: TextStyle(color: Colors.black),
         ),
-        style: TextStyle(color: Colors.black),
-        validator: validator,
-      ),
-    );
-  }
+          style: style,
+          validator: validator,
+        ),
+      );
 }
