@@ -135,7 +135,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                           foregroundColor: Color.fromARGB(255, 0, 0, 0),
-                          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                          backgroundColor: Color.fromARGB(255, 0, 0, 0),
                           padding: EdgeInsets.all(10),
                           shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),

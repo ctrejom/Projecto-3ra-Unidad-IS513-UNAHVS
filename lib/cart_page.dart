@@ -134,6 +134,17 @@ class _CartPageState extends State<CartPage> {
                       ),
                       SizedBox(height: 10),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Color.fromARGB(255, 0, 0, 0),
+                          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                          padding: EdgeInsets.all(10),
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          ),
+                          textStyle: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w300,
+                          )),
                         onPressed: PaymentPage.hasCreditCard
                             ? () {
                                 Navigator.pushReplacementNamed(
@@ -148,11 +159,7 @@ class _CartPageState extends State<CartPage> {
                               }
                             : null,
                         child: Text('Buy Now'),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 15),
-                          textStyle: TextStyle(fontSize: 18),
-                        ),
+                        
                       ),
                     ],
                   ),
