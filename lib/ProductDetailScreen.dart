@@ -17,6 +17,7 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: Text(
           title,
@@ -51,7 +52,7 @@ class ProductDetailScreen extends StatelessWidget {
               '\$$price',
               style: TextStyle(
                 fontSize: 24,
-                color: Colors.green,
+                color: Color.fromARGB(255, 0, 255, 0),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -60,12 +61,23 @@ class ProductDetailScreen extends StatelessWidget {
               description,
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.grey[700],
+                color: const Color.fromARGB(255, 0, 0, 0),
               ),
             ),
             SizedBox(height: 20),
             Center(
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                          padding: EdgeInsets.all(30),
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          ),
+                          textStyle: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w300,
+                          )),
                 onPressed: () {
                   CartPage.addToCart({
                     'title': title,

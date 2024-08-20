@@ -40,8 +40,10 @@ class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 10, 10, 10),
       appBar: AppBar(
-        title: Text('OrderPage'),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+         title: Text('Payment', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w100)),
       ),
       body: OrderPage.orderItems.isEmpty
           ? Center(child: Text('No orders placed'))
@@ -56,8 +58,8 @@ class _OrderPageState extends State<OrderPage> {
                     width: 50,
                     fit: BoxFit.contain,
                   ),
-                  title: Text(product['title']),
-                  subtitle: Text(
+                  title: Text(product['title'],style: TextStyle(color: Colors.white)),
+                  subtitle: Text(style: TextStyle(color: Color.fromARGB(255, 60, 255, 0)),
                     '\$${product['price']} x ${product['quantity']}',
                   ),
                 );

@@ -89,12 +89,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        title: Text('Home Page'),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        title: Text('Home Page', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w100)),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -150,15 +152,15 @@ class _HomePageState extends State<HomePage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'men\'s clothing'
                             ? Colors.blue
-                            : Colors.grey[200],
-                        foregroundColor: Colors.black,
+                            : const Color.fromARGB(255, 0, 0, 0),
+                        foregroundColor: Color.fromARGB(255, 255, 255, 255),
                         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
                       icon: Icon(Icons.male, size: 30, color: Colors.blue),
-                      label: Text('Men\'s clothing'),
+                      label: Text('Men\'s clothing', style: TextStyle(color: Colors.white)),
                     ),
                     SizedBox(width: 10),
                     ElevatedButton.icon(
@@ -177,18 +179,19 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
+                      
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'jewelery'
                             ? Colors.blue
-                            : Colors.grey[200],
-                        foregroundColor: Colors.black,
+                            : const Color.fromARGB(255, 0, 0, 0),
+                        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(15)),
                         ),
-                      ),
                       icon: Icon(Icons.watch, size: 30, color: Colors.purple),
                       label: Text('Jewelry'),
+                
                     ),
                     SizedBox(width: 10),
                     ElevatedButton.icon(
@@ -210,8 +213,8 @@ class _HomePageState extends State<HomePage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'electronics'
                             ? Colors.blue
-                            : Colors.grey[200],
-                        foregroundColor: Colors.black,
+                            : const Color.fromARGB(255, 0, 0, 0),
+                        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -240,8 +243,8 @@ class _HomePageState extends State<HomePage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'women\'s clothing'
                             ? Colors.blue
-                            : Colors.grey[200],
-                        foregroundColor: Colors.black,
+                            : const Color.fromARGB(255, 0, 0, 0),
+                        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -255,10 +258,12 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 10),
               Text(
-                'Recomended for You',
+                'Recomended For You',
                 style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+
                 ),
               ),
               SizedBox(height: 10),
@@ -289,11 +294,11 @@ class _HomePageState extends State<HomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(30),
                                     child: Image.network(
                                       product['image'],
-                                      height: 100,
-                                      width: 150,
+                                      height: 170,
+                                      width: 170,
                                       fit: BoxFit.contain,
                                     ),
                                   ),
@@ -304,7 +309,8 @@ class _HomePageState extends State<HomePage> {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w300),
                                   ),
                                   SizedBox(height: 5),
                                   Text(
@@ -324,7 +330,8 @@ class _HomePageState extends State<HomePage> {
                 'Best For You',
                 style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
                 ),
               ),
               SizedBox(height: 10),
@@ -354,7 +361,7 @@ class _HomePageState extends State<HomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(30),
                                     child: Image.network(
                                       product['image'],
                                       height: 100,
@@ -369,13 +376,15 @@ class _HomePageState extends State<HomePage> {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w300),
+                                        
                                   ),
                                   SizedBox(height: 5),
                                   Text(
                                     '\$${product['price']}',
                                     style: TextStyle(
-                                        fontSize: 14, color: Colors.green),
+                                        fontSize: 14, color: Colors.green,fontWeight: FontWeight.w300),
                                   ),
                                 ],
                               ),

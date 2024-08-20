@@ -57,11 +57,13 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        title: Text('Cart'),
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+         title: Text('Cart', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 30, fontWeight: FontWeight.w100)),
       ),
       body: CartPage.cartItems.isEmpty
-          ? Center(child: Text('No items in the cart'))
+          ? Center(child: Text('No items in the cart', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 30, fontWeight: FontWeight.w100)))
           : Column(
               children: [
                 Expanded(
@@ -76,8 +78,8 @@ class _CartPageState extends State<CartPage> {
                           width: 50,
                           fit: BoxFit.contain,
                         ),
-                        title: Text(product['title']),
-                        subtitle: Text(
+                        title: Text(product['title'], style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255))),
+                        subtitle: Text(style: TextStyle(color: Color.fromARGB(255, 22, 255, 1)),
                           '\$${product['price']} x ${product['quantity']} = \$${(product['price'] * product['quantity']).toStringAsFixed(2)}',
                         ),
                         trailing: Row(
@@ -127,7 +129,7 @@ class _CartPageState extends State<CartPage> {
                         'Total: \$${calculateTotalPrice().toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold, color: Colors.white
                         ),
                       ),
                       SizedBox(height: 10),

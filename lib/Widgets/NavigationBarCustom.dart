@@ -15,9 +15,9 @@ class NavigationBarCustom extends StatelessWidget {
     return BottomNavigationBar(
       currentIndex: selectedIndex,
       onTap: onItemTapped,
-      backgroundColor: Colors.white,
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      selectedItemColor: Color.fromARGB(255, 0, 174, 255),
+      unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
       selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
       unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
       items: const <BottomNavigationBarItem>[
