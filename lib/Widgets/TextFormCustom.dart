@@ -9,7 +9,8 @@ class TextFormCustom extends StatelessWidget {
   final TextStyle style;
   final IconData icon;
 
-  TextFormCustom({
+  const TextFormCustom({
+    super.key, 
     required this.label,
     required this.controller,
     this.obscureText = false,
@@ -29,7 +30,7 @@ class TextFormCustom extends StatelessWidget {
           decoration: InputDecoration(
             labelText: label,
             filled: true,
-            fillColor: Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
+            fillColor: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             ),

@@ -14,10 +14,10 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        title: Text('Registro', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w300)),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        title: const Text('Registro', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w300)),
       ),
       body: Container(
         
@@ -33,7 +33,7 @@ class RegisterPage extends StatelessWidget {
                     label: 'Nombre',
                     controller: nombreController,
                     icon: Icons.person,
-                   style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
+                   style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 15, fontWeight: FontWeight.w300),
                     validator: (value) {
                       return null;
@@ -43,7 +43,7 @@ class RegisterPage extends StatelessWidget {
                   TextFormCustom(
                     label: 'Correo Electrónico',
                     icon: Icons.email,
-                   style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
+                   style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 15, fontWeight: FontWeight.w300),
                     controller: correoController,
                     validator: (value) {
@@ -54,7 +54,7 @@ class RegisterPage extends StatelessWidget {
                     label: 'Teléfono',
                     controller: telefonoController,
                     icon: Icons.phone,
-                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
+                  style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 15, fontWeight: FontWeight.w300),
                     keyboardType: TextInputType.number,
                     validator: (value) {
@@ -64,7 +64,7 @@ class RegisterPage extends StatelessWidget {
                   TextFormCustom(
                     label: 'Contraseña',
                     icon: Icons.password,
-                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
+                    style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 15, fontWeight: FontWeight.w300),
                     controller: contraseniaController,
                     obscureText: true,
@@ -73,19 +73,19 @@ class RegisterPage extends StatelessWidget {
                       return null;
                     }, 
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           foregroundColor: const Color.fromARGB(255, 0, 0, 0),
-                          backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                          padding: EdgeInsets.all(20),
+                          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                          padding: const EdgeInsets.all(20),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w300,
                           )),
@@ -97,12 +97,12 @@ class RegisterPage extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           foregroundColor: const Color.fromARGB(255, 5, 5, 5),
-                          backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                          padding: EdgeInsets.all(20),
+                          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                          padding: const EdgeInsets.all(20),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w300,
                           )),

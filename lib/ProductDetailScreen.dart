@@ -7,7 +7,8 @@ class ProductDetailScreen extends StatelessWidget {
   final double price;
   final String description;
 
-  ProductDetailScreen({
+  const ProductDetailScreen({
+    super.key, 
     required this.title,
     required this.imageUrl,
     required this.price,
@@ -17,12 +18,17 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: Text(
           title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -33,51 +39,58 @@ class ProductDetailScreen extends StatelessWidget {
             Center(
               child: Image.network(
                 imageUrl,
-                height: 200,
+                height: 250,
                 fit: BoxFit.contain,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               title,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 18,
+              style: const TextStyle(
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               '\$$price',
-              style: TextStyle(
-                fontSize: 24,
+              style: const TextStyle(
+                fontSize: 26,
                 color: Color.fromARGB(255, 0, 255, 0),
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.bold, 
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
+            Divider(
+              color: Colors.grey[800],
+              thickness: 1,
+            ),
+            const SizedBox(height: 10),
             Text(
               description,
-              style: TextStyle(
-                fontSize: 16,
-                color: const Color.fromARGB(255, 0, 0, 0),
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white70,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 30),
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                          padding: EdgeInsets.all(30),
-                          shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          ),
-                          textStyle: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w300,
-                          )),
+                  foregroundColor: Colors.white,
+                  backgroundColor: Color.fromRGBO(30, 30, 30, 1),
+                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 onPressed: () {
                   CartPage.addToCart({
                     'title': title,
@@ -85,12 +98,14 @@ class ProductDetailScreen extends StatelessWidget {
                     'price': price,
                   });
 
-                  // Show a confirmation message
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Added to cart')),
+                    const SnackBar(
+                      content: Text('Added to cart', style: TextStyle(color: Colors.white)),
+                      backgroundColor: Colors.black,
+                    ),
                   );
                 },
-                child: Text('Add to Cart'),
+                child: const Text('Add to Cart'),
               ),
             ),
           ],

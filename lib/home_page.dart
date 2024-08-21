@@ -7,7 +7,7 @@ import 'category_page.dart';
 import 'search_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -89,10 +89,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        title: Text('Home Page', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w100)),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        title: const Text('Home Page',
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.w100)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -101,12 +105,14 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SearchBar(
-                leading: Icon(Icons.search),
+                leading: const Icon(Icons.search, color: Colors.white),
                 hintText: 'Search',
+                hintStyle: WidgetStateProperty.all(TextStyle(color: Colors.white)),
+                textStyle: WidgetStateProperty.all(TextStyle(color: Colors.white)),
                 onSubmitted: (value) {
                   if (value.trim().isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Please enter a valid term.'),
                       ),
                     );
@@ -127,8 +133,10 @@ class _HomePageState extends State<HomePage> {
                     });
                   });
                 },
+                backgroundColor:
+                    WidgetStateProperty.all(Color.fromRGBO(30, 30, 30, 1)),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -152,17 +160,21 @@ class _HomePageState extends State<HomePage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'men\'s clothing'
                             ? Colors.blue
-                            : const Color.fromARGB(255, 0, 0, 0),
-                        foregroundColor: Color.fromARGB(255, 255, 255, 255),
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            : const Color.fromRGBO(30, 30, 30, 1),
+                        foregroundColor:
+                            const Color.fromARGB(255, 255, 255, 255),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      icon: Icon(Icons.male, size: 30, color: Colors.blue),
-                      label: Text('Men\'s clothing', style: TextStyle(color: Colors.white)),
+                      icon:
+                          const Icon(Icons.male, size: 30, color: Colors.blue),
+                      label: const Text('Men\'s clothing',
+                          style: TextStyle(color: Colors.white)),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     ElevatedButton.icon(
                       onPressed: () {
                         final categoryProducts = products.where((product) {
@@ -179,21 +191,22 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-                      
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'jewelery'
                             ? Colors.blue
-                            : const Color.fromARGB(255, 0, 0, 0),
-                        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            : const Color.fromRGBO(30, 30, 30, 1),
+                        foregroundColor:
+                            const Color.fromARGB(255, 255, 255, 255),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                        ),
-                      icon: Icon(Icons.watch, size: 30, color: Colors.purple),
-                      label: Text('Jewelry'),
-                
+                            borderRadius: BorderRadius.circular(15)),
+                      ),
+                      icon: const Icon(Icons.watch,
+                          size: 30, color: Colors.purple),
+                      label: const Text('Jewelry'),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     ElevatedButton.icon(
                       onPressed: () {
                         final categoryProducts = products.where((product) {
@@ -213,17 +226,20 @@ class _HomePageState extends State<HomePage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'electronics'
                             ? Colors.blue
-                            : const Color.fromARGB(255, 0, 0, 0),
-                        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            : const Color.fromRGBO(30, 30, 30, 1),
+                        foregroundColor:
+                            const Color.fromARGB(255, 255, 255, 255),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      icon: Icon(Icons.electrical_services, size: 30, color: Colors.orange),
-                      label: Text('Electronics'),
+                      icon: const Icon(Icons.electrical_services,
+                          size: 30, color: Colors.orange),
+                      label: const Text('Electronics'),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     ElevatedButton.icon(
                       onPressed: () {
                         final categoryProducts = products.where((product) {
@@ -243,32 +259,34 @@ class _HomePageState extends State<HomePage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: selectedCategory == 'women\'s clothing'
                             ? Colors.blue
-                            : const Color.fromARGB(255, 0, 0, 0),
-                        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            : const Color.fromRGBO(30, 30, 30, 1),
+                        foregroundColor:
+                            const Color.fromARGB(255, 255, 255, 255),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      icon: Icon(Icons.female, size: 30, color: Colors.pink),
-                      label: Text('Women\'s Clothing'),
+                      icon: const Icon(Icons.female,
+                          size: 30, color: Colors.pink),
+                      label: const Text('Women\'s Clothing'),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 'Recomended For You',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w300,
                   color: Colors.white,
-
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               filteredProducts.isEmpty
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -289,7 +307,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Container(
                               width: 150,
-                              margin: EdgeInsets.only(right: 10),
+                              margin: const EdgeInsets.only(right: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -302,20 +320,20 @@ class _HomePageState extends State<HomePage> {
                                       fit: BoxFit.contain,
                                     ),
                                   ),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   Text(
                                     product['title'],
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   Text(
                                     '\$${product['price']}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 14, color: Colors.green),
                                   ),
                                 ],
@@ -325,8 +343,8 @@ class _HomePageState extends State<HomePage> {
                         }).toList(),
                       ),
                     ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 'Best For You',
                 style: TextStyle(
                   fontSize: 20,
@@ -334,7 +352,7 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               filteredProducts.length > 5
                   ? SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -356,12 +374,12 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: Container(
                               width: 150,
-                              margin: EdgeInsets.only(right: 10),
+                              margin: const EdgeInsets.only(right: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(30),
                                     child: Image.network(
                                       product['image'],
                                       height: 100,
@@ -369,22 +387,23 @@ class _HomePageState extends State<HomePage> {
                                       fit: BoxFit.contain,
                                     ),
                                   ),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   Text(
                                     product['title'],
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w300),
-                                        
                                   ),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   Text(
                                     '\$${product['price']}',
-                                    style: TextStyle(
-                                        fontSize: 14, color: Colors.green,fontWeight: FontWeight.w300),
+                                    style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.w300),
                                   ),
                                 ],
                               ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'Widgets/NavigationBarCustom.dart';
 
 class OrderPage extends StatefulWidget {
-  OrderPage({super.key});
+  const OrderPage({super.key});
 
   static List<Map<String, dynamic>> orderItems = [];
 
@@ -40,13 +40,13 @@ class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 10, 10, 10),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0), 
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-         title: Text('Payment', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w100)),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        title: const Text('Payment', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w100)),
       ),
       body: OrderPage.orderItems.isEmpty
-          ? Center(child: Text('No orders placed'))
+          ? const Center(child: Text('No orders placed', style: TextStyle(color: Colors.white))) // Texto en blanco
           : ListView.builder(
               itemCount: OrderPage.orderItems.length,
               itemBuilder: (context, index) {
@@ -58,9 +58,10 @@ class _OrderPageState extends State<OrderPage> {
                     width: 50,
                     fit: BoxFit.contain,
                   ),
-                  title: Text(product['title'],style: TextStyle(color: Colors.white)),
-                  subtitle: Text(style: TextStyle(color: Color.fromARGB(255, 60, 255, 0)),
+                  title: Text(product['title'], style: const TextStyle(color: Colors.white)), // Título en blanco
+                  subtitle: Text(
                     '\$${product['price']} x ${product['quantity']}',
+                    style: const TextStyle(color: Color.fromARGB(255, 60, 255, 0)), // Subtítulo en verde
                   ),
                 );
               },

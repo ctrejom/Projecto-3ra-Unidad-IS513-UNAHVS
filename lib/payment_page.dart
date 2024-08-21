@@ -3,7 +3,7 @@ import 'Widgets/NavigationBarCustom.dart';
 import 'Widgets/TextFormCustom.dart';
 
 class PaymentPage extends StatefulWidget {
-  PaymentPage({super.key});
+  const PaymentPage({super.key});
 
   static bool hasCreditCard = false;
 
@@ -44,14 +44,14 @@ class _PaymentPageState extends State<PaymentPage> {
   Widget build(BuildContext context) {
   
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 10, 10, 10),
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
-        title: Text('Payment', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w100)),
+        backgroundColor: const Color.fromARGB(255, 10, 10, 10),
+        title: const Text('Payment', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w100)),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Form(
             key: _formKey, 
             child: Column(
@@ -60,7 +60,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   label: 'Please enter your card number',
                   controller: tarjetaController,
                   icon: Icons.add_card,
-                  style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
+                  style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                   keyboardType: TextInputType.number,
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
@@ -71,12 +71,12 @@ class _PaymentPageState extends State<PaymentPage> {
                     return null;
                   }, 
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 TextFormCustom(
                   label: 'CVV',
                   controller: cvvController,
                   icon: Icons.add_card,
-                  style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
+                  style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                   keyboardType: TextInputType.number,
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
@@ -87,18 +87,18 @@ class _PaymentPageState extends State<PaymentPage> {
                     return null;
                   },  
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 TextFormCustom(
                   label: 'Expiration Date (MM)',
                   controller: mesController,
                   icon: Icons.date_range,
-                  style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
+                  style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                   keyboardType: TextInputType.number,
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
                       return 'Please enter a value';
                     }
-                    if(valor.length < 1 || valor.length > 2)
+                    if(valor.isEmpty || valor.length > 2)
                     {
                       return 'Please enter 2 valid digits';
                     }
@@ -109,18 +109,18 @@ class _PaymentPageState extends State<PaymentPage> {
                     return null;
                   },  
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 TextFormCustom(
                   label: 'Expiration Date (AA)',
                   controller: anioController,
                   icon: Icons.date_range,
-                  style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
+                  style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                   keyboardType: TextInputType.number,
                   validator: (valor) {
                     if (valor == null || valor.isEmpty) {
                       return 'Please enter a value';
                     }
-                    if(valor.length < 1 || valor.length > 2)
+                    if(valor.isEmpty || valor.length > 2)
                     {
                       return 'Please enter 2 valid digits';
                     }
@@ -131,16 +131,16 @@ class _PaymentPageState extends State<PaymentPage> {
                     return null;
                   }, 
                 ),
-                SizedBox(height: 110),
+                const SizedBox(height: 110),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                          foregroundColor: Color.fromARGB(255, 0, 0, 0),
-                          backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                          padding: EdgeInsets.all(10),
+                          foregroundColor: Color.fromRGBO(30, 30, 30, 1),
+                          backgroundColor: Color.fromRGBO(30, 30, 30, 1),
+                          padding: const EdgeInsets.all(10),
                           shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
                           ),
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w300,
                           )),
@@ -150,15 +150,15 @@ class _PaymentPageState extends State<PaymentPage> {
                         PaymentPage.hasCreditCard = true;
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Payment method added!', style: TextStyle(color: Colors.white))),
+                        const SnackBar(content: Text('Payment method added!', style: TextStyle(color: Colors.white))),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Please enter all the corresponding values.',style: TextStyle(color: Colors.white))),
+                        const SnackBar(content: Text('Please enter all the corresponding values.',style: TextStyle(color: Colors.white))),
                       );
                     }
                   },
-                  child: Text('Save Payment Method',style: TextStyle(color: Colors.white)),
+                  child: const Text('Save Payment Method',style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),

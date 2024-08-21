@@ -5,19 +5,20 @@ class CategoryGridPage extends StatelessWidget {
   final List<dynamic> products;
   final String categoryName;
 
-  CategoryGridPage({required this.products, required this.categoryName});
+  const CategoryGridPage({super.key, required this.products, required this.categoryName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0), // Fondo oscuro
       appBar: AppBar(
-        title: Text(categoryName),
+        title: Text(categoryName, style: const TextStyle(color: Colors.white)),
+        backgroundColor: const Color.fromARGB(255, 10, 10, 10), // Fondo de la AppBar oscuro
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10.0,
             mainAxisSpacing: 10.0,
@@ -41,6 +42,7 @@ class CategoryGridPage extends StatelessWidget {
                 );
               },
               child: Card(
+                color: const Color.fromARGB(255, 20, 20, 20), // Fondo oscuro para la tarjeta
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -49,7 +51,7 @@ class CategoryGridPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
                       child: Image.network(
                         product['image'],
                         height: 100,
@@ -66,12 +68,12 @@ class CategoryGridPage extends StatelessWidget {
                             product['title'],
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white), // Texto en blanco
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           Text(
                             '\$${product['price']}',
-                            style: TextStyle(fontSize: 14, color: Colors.green),
+                            style: const TextStyle(fontSize: 14, color: Colors.green), // Precio en verde
                           ),
                         ],
                       ),
