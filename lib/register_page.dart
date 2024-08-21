@@ -36,8 +36,13 @@ class RegisterPage extends StatelessWidget {
                    style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 15, fontWeight: FontWeight.w300),
                     validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'El nombre es obligatorio';
+                      }
+                      if (value.length < 3 || value.length > 10) {
+                        return 'El nombre debe contener entre 3 y 10 caracteres';
+                      }
                       return null;
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:1859046140.
                     }, 
                   ),
                   TextFormCustom(
@@ -47,6 +52,21 @@ class RegisterPage extends StatelessWidget {
                   fontSize: 15, fontWeight: FontWeight.w300),
                     controller: correoController,
                     validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'El Correo Electrónico es obligatorio';
+                      }
+                      if (!value.contains('@')) {
+                        return 'El Correo Electrónico debe contener un @';
+                      }
+                      if (value.indexOf('@') != value.lastIndexOf('@')) {
+                        return 'No puede haber más de un @';
+                      }
+                      if (!value.endsWith('@unah.hn')) {
+                        return 'El Correo Electrónico debe contener unah.hn';
+                      }
+                      if (value.contains(' ')) {
+                        return 'El Correo Electrónico no puede contener espacios';
+                      }
                       return null;
                     }, 
                   ),
@@ -58,6 +78,24 @@ class RegisterPage extends StatelessWidget {
                   fontSize: 15, fontWeight: FontWeight.w300),
                     keyboardType: TextInputType.number,
                     validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'El Teléfono es obligatorio';
+                      }
+                      if (value.length != 8) {
+                        return 'El Teléfono debe tener exactamente 8 números';
+                      }
+                      if (value[0] != '3' && value[0] != '9') {
+                        return 'El Teléfono debe iniciar con 3 o 9';
+                      }
+                      if (value.contains(' ')) {
+                        return 'El Teléfono no puede contener espacios';
+                      }
+                      if (value.contains(',') || value.contains('.')) {
+                        return 'El Teléfono no puede contener puntos o comas';
+                      }
+                      if (value.contains('-')) {
+                        return 'El Teléfono no puede contener guiones';
+                      }
                       return null;
                     }, 
                   ),
@@ -69,6 +107,27 @@ class RegisterPage extends StatelessWidget {
                     controller: contraseniaController,
                     obscureText: true,
                     validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'La Contraseña es obligatoria';
+                      }
+                      if (value.length < 8) {
+                        return 'La Contraseña debe tener al menos 8 caracteres';
+                      }
+                      if (value.contains(' ')) {
+                        return 'La Contraseña no puede contener espacios';
+                      }
+                      if (!RegExp(r'[A-Z]').hasMatch(value)) {
+                        return 'La Contraseña debe tener al menos una mayúscula';
+                      }
+                      if (!RegExp(r'[a-z]').hasMatch(value)) {
+                        return 'La Contraseña debe tener al menos una minúscula';
+                      }
+                      if (!RegExp(r'[0-9]').hasMatch(value)) {
+                        return 'La Contraseña debe tener al menos un número';
+                      }
+                      if (!RegExp(r'[!@#\$&*~]').hasMatch(value)) {
+                        return 'La Contraseña debe tener al menos un caracter especial';
+                      }
 
                       return null;
                     }, 
@@ -90,7 +149,13 @@ class RegisterPage extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                           )),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, 'login');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Succesfully registered', style: TextStyle(color: Colors.white)),
+                              backgroundColor: Color.fromRGBO(30, 30, 30, 1),
+                            ),
+                          );
+                          Navigator.pushReplacementNamed(context, 'login');
                       },
                       child: const Text('Registrar'),
                     ),

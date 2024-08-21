@@ -32,12 +32,20 @@ class LoginPage extends StatelessWidget {
                   TextFormCustom(
                   controller: nombreController,
                   label: 'Nombre de Usuario',
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:4277292450.
                   style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255), 
                   fontSize: 15, fontWeight: FontWeight.w300),
                   icon: Icons.person,
                   validator: (valor) {
-                    return null;
+                    if ((valor!.isEmpty)) {
+                        return 'El nombre es obligatorio';
+                      }
+                      final usuario = valor.toUpperCase();
+                      if ((usuario != 'CTREJOM@UNAH.HN') &&
+                          (usuario != 'WAI.TSE@UNAH.HN') &&
+                          (usuario != 'ALLANCRUZ@UNAH.HN')) {
+                        return 'El Usuario que ingresó es incorrecto';
+                      }
+                      return null;
                   }, 
                   
                 ),
@@ -50,6 +58,20 @@ class LoginPage extends StatelessWidget {
                   fontSize: 15, fontWeight: FontWeight.w300),
                   obscureText: true,
                   validator: (valor) {
+                     if ((valor!.isEmpty)) {
+                        return 'La Contraseña es obligatoria';
+                      }
+                      final usuario = nombreController.text.toUpperCase();
+                      if (usuario == 'CTREJOM@UNAH.HN' &&
+                          valor != '20212000569') {
+                        return 'Contraseña incorrecta para el usuario';
+                      } else if (usuario == 'WAI.TSE@UNAH.HN' &&
+                          valor != '20212000972') {
+                        return 'Contraseña incorrecta para el usuario';
+                      } else if (usuario == 'ALLANCRUZ@UNAH.HN' &&
+                          valor != '20192002956') {
+                        return 'Contraseña incorrecta para el usuario';
+                      }
                     return null; 
                   }, 
                   
