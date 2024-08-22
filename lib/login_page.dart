@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         title: const Text('Login', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w100)),
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Form(
@@ -93,7 +93,10 @@ class LoginPage extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                           )),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, 'Home');
+                        if (formkey.currentState!.validate()) {
+                            Navigator.pushReplacementNamed(
+                              context, 'Home');
+                          }
                       },
                       child: const Text('Iniciar sesión'),
                     ),

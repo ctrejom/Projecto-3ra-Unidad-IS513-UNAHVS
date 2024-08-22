@@ -13,14 +13,16 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-        title: const Text('Registro', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w300)),
+        title: const Text('Registro',
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.w300)),
       ),
-      body: Container(
-        
+      body: SingleChildScrollView(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -33,8 +35,10 @@ class RegisterPage extends StatelessWidget {
                     label: 'Nombre',
                     controller: nombreController,
                     icon: Icons.person,
-                   style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 15, fontWeight: FontWeight.w300),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w300),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'El nombre es obligatorio';
@@ -43,13 +47,15 @@ class RegisterPage extends StatelessWidget {
                         return 'El nombre debe contener entre 3 y 10 caracteres';
                       }
                       return null;
-                    }, 
+                    },
                   ),
                   TextFormCustom(
                     label: 'Correo Electrónico',
                     icon: Icons.email,
-                   style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 15, fontWeight: FontWeight.w300),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w300),
                     controller: correoController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -61,21 +67,23 @@ class RegisterPage extends StatelessWidget {
                       if (value.indexOf('@') != value.lastIndexOf('@')) {
                         return 'No puede haber más de un @';
                       }
-                      if (!value.endsWith('@unah.hn')) {
+                      if (!value.endsWith('@unah.hn') && !value.endsWith('gmail.com')) {
                         return 'El Correo Electrónico debe contener unah.hn';
                       }
                       if (value.contains(' ')) {
                         return 'El Correo Electrónico no puede contener espacios';
                       }
                       return null;
-                    }, 
+                    },
                   ),
                   TextFormCustom(
                     label: 'Teléfono',
                     controller: telefonoController,
                     icon: Icons.phone,
-                  style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 15, fontWeight: FontWeight.w300),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w300),
                     keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -97,13 +105,15 @@ class RegisterPage extends StatelessWidget {
                         return 'El Teléfono no puede contener guiones';
                       }
                       return null;
-                    }, 
+                    },
                   ),
                   TextFormCustom(
                     label: 'Contraseña',
                     icon: Icons.password,
-                    style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 15, fontWeight: FontWeight.w300),
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w300),
                     controller: contraseniaController,
                     obscureText: true,
                     validator: (value) {
@@ -130,52 +140,57 @@ class RegisterPage extends StatelessWidget {
                       }
 
                       return null;
-                    }, 
+                    },
                   ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          foregroundColor: const Color.fromARGB(255, 0, 0, 0),
-                          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                          padding: const EdgeInsets.all(20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          textStyle: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w300,
-                          )),
-                      onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                            backgroundColor:
+                                const Color.fromARGB(255, 255, 255, 255),
+                            padding: const EdgeInsets.all(20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            textStyle: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w300,
+                            )),
+                        onPressed: () {
+                          if (formkey.currentState!.validate()) {
+                            Navigator.pushNamed(context, 'login');
+                            ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Succesfully registered', style: TextStyle(color: Colors.white)),
+                              content: Text('Succesfully registered',
+                                  style: TextStyle(color: Colors.white)),
                               backgroundColor: Color.fromRGBO(30, 30, 30, 1),
                             ),
                           );
+                          }
+                        },
+                        child: const Text('Registrar'),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: const Color.fromARGB(255, 5, 5, 5),
+                            backgroundColor:
+                                const Color.fromARGB(255, 255, 255, 255),
+                            padding: const EdgeInsets.all(20),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            textStyle: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w300,
+                            )),
+                        onPressed: () {
                           Navigator.pushReplacementNamed(context, 'login');
-                      },
-                      child: const Text('Registrar'),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          foregroundColor: const Color.fromARGB(255, 5, 5, 5),
-                          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                          padding: const EdgeInsets.all(20),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          textStyle: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w300,
-                          )),
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(context, 'login');
-                      },
-                      child: const Text('Cancelar'),
-                    ),
+                        },
+                        child: const Text('Cancelar'),
+                      ),
                     ],
                   ),
                 ],
